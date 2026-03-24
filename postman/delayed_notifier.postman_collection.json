@@ -1,0 +1,118 @@
+{
+	"info": {
+		"name": "Delayed Notifier",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8773"
+		},
+		{
+			"key": "user_id",
+			"value": "1"
+		},
+		{
+			"key": "notification_id",
+			"value": "00000000-0000-0000-0000-000000000000"
+		}
+	],
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"test@example.com\",\n\t\"name\": \"Test User\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["users", "{{user_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Create Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"channel\": \"email\",\n\t\"recipient\": \"test@example.com\",\n\t\"subject\": \"Reminder\",\n\t\"body\": \"Don't forget about the meeting\",\n\t\"status\": \"pending\",\n\t\"send_at\": \"2026-03-15T10:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notify",
+							"host": ["{{base_url}}"],
+							"path": ["notify"]
+						}
+					}
+				},
+				{
+					"name": "Get Notification by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/notify/{{notification_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["notify", "{{notification_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Delete Notification by ID",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{base_url}}/notify/{{notification_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["notify", "{{notification_id}}"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
